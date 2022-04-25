@@ -13,8 +13,8 @@
     <groupId>ru.lanit.research.graphql</groupId>
     <artifactId>graphql-poc</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>graphql-poc</name>
-    <description>PoC project for GraphQL</description>
+    <name>envers-poc</name>
+    <description>PoC project for Hibernate Envers</description>
 
     <properties>
         <java.version>11</java.version>
@@ -48,15 +48,6 @@
         </dependency>
 
         <!-- Adapter technologies  -->
-        <!-- ...GraphQL -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-graphql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
         <!-- ...Data -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -67,22 +58,11 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.5</version>
         </dependency>
-        <!-- ...Kafka -->
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-            <version>2.8.0</version>
-        </dependency>
 
         <!-- Test containers -->
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>postgresql</artifactId>
-            <version>1.15.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>kafka</artifactId>
             <version>1.15.2</version>
         </dependency>
     </dependencies>
