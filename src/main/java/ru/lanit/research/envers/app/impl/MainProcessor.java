@@ -2,7 +2,7 @@ package ru.lanit.research.envers.app.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.data.history.Revisions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.lanit.research.envers.adapter.jpa.IndividualEntrepreneurJpaRepository;
@@ -52,5 +52,10 @@ public class MainProcessor {
     @Transactional
     public IndividualEntrepreneur getIndividualEntrepreneur(UUID ieId) {
         return individualEntrepreneurJpaRepository.findById(ieId).orElseThrow();
+    }
+
+    public void getIndividualEntrepreneurRevisions(UUID ieId){
+        Revisions<Long, IndividualEntrepreneur> revisions = individualEntrepreneurJpaRepository.findRevisions(ieId);
+        revisions.stream().forEach(individualEntrepreneurRevision -> log.info("IE revision = {}", individualEntrepreneurRevision));
     }
 }

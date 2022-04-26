@@ -1,0 +1,26 @@
+databaseChangeLog:
+- changeSet:
+    id: 01b-create_envers_objects
+    author: dermakov
+    changes:
+    - createTable:
+        tableName: REVINFO
+        columns:
+        - column:
+            name: REV
+            type: NUMBER
+            constraints:
+              nullable: false
+        - column:
+            name: REVTSTMP
+            type: NUMBER
+            constraints:
+              nullable: false
+    - addPrimaryKey:
+        columnNames: REV
+        constraintName: PK_REVINFO
+        tableName: REVINFO
+        validate: true
+    rollback:
+    - dropTable:
+        tableName: REVINFO

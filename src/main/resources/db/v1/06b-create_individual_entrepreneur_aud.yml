@@ -1,0 +1,49 @@
+databaseChangeLog:
+- changeSet:
+    id: 06b-create_individual_entrepreneur_aud
+    author: deermakov
+    changes:
+    - createTable:
+        tableName: INDIVIDUAL_ENTREPRENEUR_AUD
+        columns:
+        - column:
+            name: ID
+            type: UUID
+        - column:
+            name: REV
+            type: NUMBER
+            constraints:
+              nullable: false
+        - column:
+            name: NAME
+            type: CHAR(100)
+            constraints:
+              nullable: true
+        - column:
+            name: INN
+            type: CHAR(10)
+            constraints:
+              nullable: true
+        - column:
+            name: DEAL_ID
+            type: UUID
+            constraints:
+              nullable: true
+        - column:
+            name: SELF_EMPLOYED
+            type: BOOLEAN
+            constraints:
+              nullable: true
+        - column:
+            name: INDIVIDUAL_ID
+            type: UUID
+            constraints:
+              nullable: false
+    - addPrimaryKey:
+        columnNames: REV
+        constraintName: PK_INDIVIDUAL_ENTREPRENEUR_AUD
+        tableName: INDIVIDUAL_ENTREPRENEUR_AUD
+        validate: true
+    rollback:
+    - dropTable:
+        tableName: INDIVIDUAL_ENTREPRENEUR_AUD

@@ -1,11 +1,12 @@
 package ru.lanit.research.envers.adapter.jpa;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.history.RevisionRepository;
 import ru.lanit.research.envers.domain.LegalEntity;
 
 import java.util.List;
 import java.util.UUID;
 
-public interface LegalEntityJpaRepository extends CrudRepository<LegalEntity, UUID> {
-    List<LegalEntity> findAllByOrderByInn();
+public interface LegalEntityJpaRepository extends CrudRepository<LegalEntity, UUID>,
+    RevisionRepository<LegalEntity, UUID, Long> {
 }

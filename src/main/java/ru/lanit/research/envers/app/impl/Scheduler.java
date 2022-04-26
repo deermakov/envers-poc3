@@ -4,13 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import ru.lanit.research.envers.adapter.jpa.IndividualEntrepreneurJpaRepository;
-import ru.lanit.research.envers.adapter.jpa.IndividualJpaRepository;
-import ru.lanit.research.envers.domain.Individual;
 import ru.lanit.research.envers.domain.IndividualEntrepreneur;
 
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -26,18 +21,20 @@ public class Scheduler {
     @Scheduled(fixedDelay = 5000)
     public void save() {
         if (!processed) {
+            processed = true;
+
             IndividualEntrepreneur ie = mainProcessor.createIndividualEntrepreneur();
-            log.info("ie id = {}", ie.getId());
+            UUID ieId = ie.getId();
+            log.info("ie id = {}", ieId);
             log.info("ie name = {}", ie.getName());
             log.info("ie owner id = {}", ie.getIndividual().getId());
 
-            mainProcessor.updateIndividualEntrepreneur(ie.getId());
+            mainProcessor.updateIndividualEntrepreneur(ieId);
 
-            IndividualEntrepreneur updatedIe = mainProcessor.getIndividualEntrepreneur(ie.getId());
+            IndividualEntrepreneur updatedIe = mainProcessor.getIndividualEntrepreneur(ieId);
             log.info("updated ie name = {}", updatedIe.getName());
 
-            processed = true;
+            mainProcessor.getIndividualEntrepreneurRevisions(ieId);
         }
     }
-
 }

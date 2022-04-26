@@ -1,13 +1,21 @@
 databaseChangeLog:
-  - include:
-      file: classpath:/db/v1/01-create_jpa_objects.yml
-  - include:
-      file: classpath:/db/v1/02-create_deal.yml
-  - include:
-      file: classpath:/db/v1/03-create_party.yml
-  - include:
-      file: classpath:/db/v1/04-create_legal_entity.yml
-  - include:
-      file: classpath:/db/v1/05-create_individual.yml
-  - include:
-      file: classpath:/db/v1/06-create_individual_entrepreneur.yml
+- include:
+    file: classpath:/db/v1/01-create_jpa_objects.yml
+- include:
+    file: classpath:/db/v1/01b-create_envers_objects.yml
+- include:
+    file: classpath:/db/v1/02-create_deal.yml
+- include:
+    file: classpath:/db/v1/03-create_party.yml
+- include:
+    file: classpath:/db/v1/03b-create_party_aud.yml
+- include:
+    file: classpath:/db/v1/04-create_legal_entity.yml
+- include:
+    file: classpath:/db/v1/04b-create_legal_entity_aud.yml
+- include:
+    file: classpath:/db/v1/05-create_individual.yml
+- include:
+    file: classpath:/db/v1/06-create_individual_entrepreneur.yml
+- include:
+    file: classpath:/db/v1/06b-create_individual_entrepreneur_aud.yml

@@ -1,17 +1,24 @@
 databaseChangeLog:
 - changeSet:
-    id: 03-create_party
+    id: 04b-create_legal_entity_aud
     author: deermakov
     changes:
     - createTable:
-        tableName: PARTY
+        tableName: LEGAL_ENTITY_AUD
         columns:
         - column:
             name: ID
             type: UUID
         - column:
-            name: ACTUAL_TO
-            type: DATE
+            name: REV
+            type: NUMBER
+            constraints:
+              nullable: false
+        - column:
+            name: NAME
+            type: CHAR(100)
+            constraints:
+              nullable: true
         - column:
             name: INN
             type: CHAR(10)
@@ -23,10 +30,10 @@ databaseChangeLog:
             constraints:
               nullable: true
     - addPrimaryKey:
-        columnNames: ID
-        constraintName: PK_PARTY
-        tableName: PARTY
+        columnNames: REV
+        constraintName: PK_LEGAL_ENTITY_AUD
+        tableName: LEGAL_ENTITY_AUD
         validate: true
     rollback:
     - dropTable:
-        tableName: PARTY
+        tableName: LEGAL_ENTITY_AUD
