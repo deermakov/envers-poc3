@@ -5,12 +5,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.history.Revisions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import ru.lanit.research.envers.adapter.jpa.DealJpaRepository;
 import ru.lanit.research.envers.adapter.jpa.IndividualEntrepreneurJpaRepository;
 import ru.lanit.research.envers.adapter.jpa.IndividualJpaRepository;
+import ru.lanit.research.envers.domain.Deal;
 import ru.lanit.research.envers.domain.Individual;
 import ru.lanit.research.envers.domain.IndividualEntrepreneur;
+import ru.lanit.research.envers.domain.Party;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -22,6 +27,7 @@ import java.util.UUID;
 public class MainProcessor {
     private final IndividualEntrepreneurJpaRepository individualEntrepreneurJpaRepository;
     private final IndividualJpaRepository individualJpaRepository;
+    private final DealJpaRepository dealJpaRepository;
 
     @Transactional
     public IndividualEntrepreneur createIndividualEntrepreneur() {
@@ -57,8 +63,36 @@ public class MainProcessor {
         return individualEntrepreneurJpaRepository.findById(ieId).orElseThrow();
     }
 
-    public void getIndividualEntrepreneurRevisions(UUID ieId){
+    public void getIndividualEntrepreneurRevisions(UUID ieId) {
         Revisions<Long, IndividualEntrepreneur> revisions = individualEntrepreneurJpaRepository.findRevisions(ieId);
         revisions.stream().forEach(individualEntrepreneurRevision -> log.info("IE revision = {}", individualEntrepreneurRevision));
     }
+
+    @Transactional
+    public Deal createDeal(UUID ieId) {
+        IndividualEntrepreneur ie = individualEntrepreneurJpaRepository.findById(ieId).orElseThrow();
+
+        // Полиморфная ссылка !
+        List<Party> participants = List.of(ie, ie.getIndividual());
+
+        Deal deal = Deal.builder()
+            .num("№ 1")
+            .sum(BigDecimal.TEN)
+            .participants(participants) // нужно ?
+            .build();
+
+        // ссылка на Deal лежит в Party, поэтому надо ее заполнить
+        participants.stream().forEach(party -> party.setDeal(deal));
+
+        dealJpaRepository.save(deal);
+        // не нужно, т.к. JPA сам сохраняет измененные сущности: individualEntrepreneurJpaRepository.save(ie);
+
+        return deal;
+    }
+
+    @Transactional
+    public Deal getDeal(UUID dealId) {
+        return dealJpaRepository.findById(dealId).orElseThrow();
+    }
+
 }

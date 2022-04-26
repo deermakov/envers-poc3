@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import ru.lanit.research.envers.domain.Deal;
 import ru.lanit.research.envers.domain.IndividualEntrepreneur;
 
 import java.util.UUID;
@@ -35,6 +36,12 @@ public class Scheduler {
             log.info("updated ie name = {}", updatedIe.getName());
 
             mainProcessor.getIndividualEntrepreneurRevisions(ieId);
+
+            // Создание полиморфной ссылки
+            Deal deal = mainProcessor.createDeal(ieId);
+            deal.getParticipants().stream().forEach(party -> log.info("created deal participant = {}", party));
+            Deal deal2 = mainProcessor.getDeal(deal.getId());
+            deal2.getParticipants().stream().forEach(party -> log.info("read deal participant = {}", party));
         }
     }
 }
