@@ -10,6 +10,9 @@ import ru.lanit.research.envers.adapter.jpa.IndividualJpaRepository;
 import ru.lanit.research.envers.domain.Individual;
 import ru.lanit.research.envers.domain.IndividualEntrepreneur;
 
+import java.util.Date;
+import java.util.UUID;
+
 /**
  * Оркестратор отправки сообщений
  */
@@ -20,22 +23,34 @@ public class MainProcessor {
     private final IndividualEntrepreneurJpaRepository individualEntrepreneurJpaRepository;
     private final IndividualJpaRepository individualJpaRepository;
 
-    @Scheduled(fixedDelay = 5000)
     @Transactional
-    public void save() {
-        createIndividualEntrepreneur();
-    }
-
-    private void createIndividualEntrepreneur() {
+    public IndividualEntrepreneur createIndividualEntrepreneur() {
         Individual individual = Individual.builder()
+            .actualTo(new Date())
             .fio("Иванов Иван Иванович")
+            .inn("77200300")
             .build();
         individualJpaRepository.save(individual);
 
         IndividualEntrepreneur individualEntrepreneur = IndividualEntrepreneur.builder()
-            .fullName("ИП Иванов")
+            .actualTo(new Date())
+            .name("ИП Иванов")
+            .inn("23100200")
+            .selfEmployed(false)
             .individual(individual)
             .build();
-        individualEntrepreneurJpaRepository.save(individualEntrepreneur);
+        return individualEntrepreneurJpaRepository.save(individualEntrepreneur);
+    }
+
+    @Transactional
+    public IndividualEntrepreneur updateIndividualEntrepreneur(UUID ieId) {
+        IndividualEntrepreneur individualEntrepreneur = individualEntrepreneurJpaRepository.findById(ieId).orElseThrow();
+        individualEntrepreneur.setName("Новое имя");
+        return individualEntrepreneur;
+    }
+
+    @Transactional
+    public IndividualEntrepreneur getIndividualEntrepreneur(UUID ieId) {
+        return individualEntrepreneurJpaRepository.findById(ieId).orElseThrow();
     }
 }

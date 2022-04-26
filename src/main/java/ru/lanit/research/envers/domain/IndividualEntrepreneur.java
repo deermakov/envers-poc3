@@ -19,5 +19,5 @@ public class IndividualEntrepreneur extends LegalEntity {
     @JoinColumn(name = "individual_id")
     private Individual individual;
 
-    private String fullName;
+    private Boolean selfEmployed;
 }

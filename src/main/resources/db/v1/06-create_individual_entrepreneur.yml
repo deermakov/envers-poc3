@@ -10,8 +10,8 @@ databaseChangeLog:
             name: ID
             type: UUID
         - column:
-            name: FULL_NAME
-            type: CHAR(100)
+            name: SELF_EMPLOYED
+            type: BOOLEAN
             constraints:
               nullable: true
         - column:
