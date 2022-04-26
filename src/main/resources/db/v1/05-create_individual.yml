@@ -1,0 +1,35 @@
+databaseChangeLog:
+- changeSet:
+    id: 05-create_individual
+    author: deermakov
+    changes:
+    - createTable:
+        tableName: INDIVIDUAL
+        columns:
+        - column:
+            name: ID
+            type: UUID
+        - column:
+            name: FIO
+            type: CHAR(100)
+            constraints:
+              nullable: true
+    - addPrimaryKey:
+        columnNames: ID
+        constraintName: PK_INDIVIDUAL
+        tableName: INDIVIDUAL
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: ID
+        baseTableName: INDIVIDUAL
+        constraintName: FK_I_PARTY
+        deferrable: true
+        initiallyDeferred: true
+        onDelete: CASCADE
+        onUpdate: RESTRICT
+        referencedColumnNames: ID
+        referencedTableName: PARTY
+        validate: true
+    rollback:
+    - dropTable:
+        tableName: INDIVIDUAL

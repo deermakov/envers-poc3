@@ -1,0 +1,51 @@
+databaseChangeLog:
+- changeSet:
+    id: 06-create_individual_entrepreneur
+    author: deermakov
+    changes:
+    - createTable:
+        tableName: INDIVIDUAL_ENTREPRENEUR
+        columns:
+        - column:
+            name: ID
+            type: UUID
+        - column:
+            name: FULL_NAME
+            type: CHAR(100)
+            constraints:
+              nullable: true
+        - column:
+            name: INDIVIDUAL_ID
+            type: UUID
+            constraints:
+              nullable: false
+    - addPrimaryKey:
+        columnNames: ID
+        constraintName: PK_INDIVIDUAL_ENTREPRENEUR
+        tableName: INDIVIDUAL_ENTREPRENEUR
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: ID
+        baseTableName: INDIVIDUAL_ENTREPRENEUR
+        constraintName: FK_IE_LE
+        deferrable: true
+        initiallyDeferred: true
+        onDelete: CASCADE
+        onUpdate: RESTRICT
+        referencedColumnNames: ID
+        referencedTableName: LEGAL_ENTITY
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: INDIVIDUAL_ID
+        baseTableName: INDIVIDUAL_ENTREPRENEUR
+        constraintName: FK_IE_I
+        deferrable: true
+        initiallyDeferred: true
+        onDelete: CASCADE
+        onUpdate: RESTRICT
+        referencedColumnNames: ID
+        referencedTableName: INDIVIDUAL
+        validate: true
+    rollback:
+    - dropTable:
+        tableName: INDIVIDUAL_ENTREPRENEUR

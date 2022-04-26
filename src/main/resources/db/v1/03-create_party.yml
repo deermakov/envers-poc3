@@ -1,32 +1,32 @@
 databaseChangeLog:
 - changeSet:
-    id: 02-create_deal
+    id: 03-create_party
     author: deermakov
     changes:
     - createTable:
-        tableName: DEAL
+        tableName: PARTY
         columns:
         - column:
             name: ID
             type: UUID
         - column:
-            name: ACTUAL_TO
-            type: DATE
+              name: ACTUAL_TO
+              type: DATE
         - column:
-            name: NUM
+            name: INN
             type: CHAR(10)
             constraints:
-              nullable: false
+              nullable: true
         - column:
-            name: SUM
-            type: NUMBER
+            name: DEAL_ID
+            type: UUID
             constraints:
               nullable: true
     - addPrimaryKey:
         columnNames: ID
-        constraintName: PK_DEAL
-        tableName: DEAL
+        constraintName: PK_PARTY
+        tableName: PARTY
         validate: true
     rollback:
     - dropTable:
-        tableName: DEAL
+        tableName: PARTY

@@ -1,7 +1,7 @@
-package ru.lanit.research.graphql.adapter.jpa;
+package ru.lanit.research.envers.adapter.jpa;
 
 import org.springframework.data.repository.CrudRepository;
-import ru.lanit.research.graphql.domain.LegalEntity;
+import ru.lanit.research.envers.domain.LegalEntity;
 
 import java.util.List;
 import java.util.UUID;

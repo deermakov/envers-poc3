@@ -1,0 +1,35 @@
+databaseChangeLog:
+- changeSet:
+    id: 04-create_legal_entity
+    author: deermakov
+    changes:
+    - createTable:
+        tableName: LEGAL_ENTITY
+        columns:
+        - column:
+            name: ID
+            type: UUID
+        - column:
+            name: NAME
+            type: CHAR(100)
+            constraints:
+              nullable: true
+    - addPrimaryKey:
+        columnNames: ID
+        constraintName: PK_LEGAL_ENTITY
+        tableName: LEGAL_ENTITY
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: ID
+        baseTableName: LEGAL_ENTITY
+        constraintName: FK_LE_PARTY
+        deferrable: true
+        initiallyDeferred: true
+        onDelete: CASCADE
+        onUpdate: RESTRICT
+        referencedColumnNames: ID
+        referencedTableName: PARTY
+        validate: true
+    rollback:
+    - dropTable:
+        tableName: LEGAL_ENTITY

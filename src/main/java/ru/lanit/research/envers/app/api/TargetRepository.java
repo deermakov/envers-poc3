@@ -1,6 +1,6 @@
-package ru.lanit.research.graphql.app.api;
+package ru.lanit.research.envers.app.api;
 
-import ru.lanit.research.graphql.domain.Party;
+import ru.lanit.research.envers.domain.Party;
 
 import java.util.List;
 

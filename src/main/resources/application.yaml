@@ -1,6 +1,6 @@
 spring:
   application:
-    name: graphql-poc
+    name: envers-poc
     version: replaceVersion
   datasource:
     driver-class-name: org.postgresql.Driver

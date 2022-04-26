@@ -1,4 +1,4 @@
-package ru.lanit.research.graphql.fw;
+package ru.lanit.research.envers.fw;
 
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;

@@ -1,4 +1,4 @@
-package ru.lanit.research.graphql.fw;
+package ru.lanit.research.envers.fw;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication(scanBasePackages = "ru.lanit")
-@EnableJpaRepositories("ru.lanit.research.graphql.adapter.jpa")
-@EntityScan("ru.lanit.research.graphql.domain")
+@EnableJpaRepositories("ru.lanit.research.envers.adapter.jpa")
+@EntityScan("ru.lanit.research.envers.domain")
 @EnableTransactionManagement
 @EnableScheduling
 public class Application {
