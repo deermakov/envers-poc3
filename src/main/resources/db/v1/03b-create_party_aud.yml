@@ -24,7 +24,7 @@ databaseChangeLog:
             type: DATE
         - column:
             name: INN
-            type: CHAR(10)
+            type: VARCHAR(10)
             constraints:
               nullable: true
         - column:

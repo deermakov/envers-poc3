@@ -2,6 +2,7 @@ package ru.lanit.research.envers.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 @Table(name = "INDIVIDUAL_ENTREPRENEUR")
 @Audited
 @Data
+@ToString(callSuper = true)
 @SuperBuilder
 @NoArgsConstructor
 public class IndividualEntrepreneur extends LegalEntity {

@@ -34,7 +34,7 @@ public class MainProcessor {
 
         IndividualEntrepreneur individualEntrepreneur = IndividualEntrepreneur.builder()
             .actualTo(new Date())
-            .name("ИП Иванов")
+            .name("ИП Иванов И.И.")
             .inn("23100200")
             .selfEmployed(false)
             .individual(individual)
@@ -45,7 +45,10 @@ public class MainProcessor {
     @Transactional
     public IndividualEntrepreneur updateIndividualEntrepreneur(UUID ieId) {
         IndividualEntrepreneur individualEntrepreneur = individualEntrepreneurJpaRepository.findById(ieId).orElseThrow();
-        individualEntrepreneur.setName("Новое имя");
+        individualEntrepreneur.setName("ИП Новое ФИО");
+        individualEntrepreneur.setInn("33100300");
+        individualEntrepreneur.getIndividual().setFio("Новое ФИО");
+        individualEntrepreneur.setSelfEmployed(true);
         return individualEntrepreneur;
     }
 

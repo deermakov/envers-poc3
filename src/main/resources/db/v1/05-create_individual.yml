@@ -11,7 +11,7 @@ databaseChangeLog:
             type: UUID
         - column:
             name: FIO
-            type: CHAR(100)
+            type: VARCHAR(100)
             constraints:
               nullable: true
     - addPrimaryKey:

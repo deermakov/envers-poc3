@@ -16,12 +16,12 @@ databaseChangeLog:
               nullable: false
         - column:
             name: NAME
-            type: CHAR(100)
+            type: VARCHAR(100)
             constraints:
               nullable: true
         - column:
             name: INN
-            type: CHAR(10)
+            type: VARCHAR(10)
             constraints:
               nullable: true
         - column:
