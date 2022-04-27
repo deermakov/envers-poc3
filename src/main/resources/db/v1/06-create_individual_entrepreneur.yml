@@ -10,6 +10,24 @@ databaseChangeLog:
             name: ID
             type: UUID
         - column:
+            name: ACTUAL_TO
+            type: DATE
+        - column:
+            name: INN
+            type: VARCHAR(10)
+            constraints:
+              nullable: true
+        - column:
+            name: DEAL_ID
+            type: UUID
+            constraints:
+              nullable: true
+        - column:
+            name: NAME
+            type: VARCHAR(100)
+            constraints:
+              nullable: true
+        - column:
             name: SELF_EMPLOYED
             type: BOOLEAN
             constraints:
@@ -23,17 +41,6 @@ databaseChangeLog:
         columnNames: ID
         constraintName: PK_INDIVIDUAL_ENTREPRENEUR
         tableName: INDIVIDUAL_ENTREPRENEUR
-        validate: true
-    - addForeignKeyConstraint:
-        baseColumnNames: ID
-        baseTableName: INDIVIDUAL_ENTREPRENEUR
-        constraintName: FK_IE_LE
-        deferrable: true
-        initiallyDeferred: true
-        onDelete: CASCADE
-        onUpdate: RESTRICT
-        referencedColumnNames: ID
-        referencedTableName: LEGAL_ENTITY
         validate: true
     - addForeignKeyConstraint:
         baseColumnNames: INDIVIDUAL_ID

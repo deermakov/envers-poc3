@@ -1,0 +1,80 @@
+databaseChangeLog:
+- changeSet:
+    id: 07-create_deal
+    author: deermakov
+    changes:
+    - createTable:
+        tableName: DEAL
+        columns:
+        - column:
+            name: ID
+            type: UUID
+        - column:
+            name: ACTUAL_TO
+            type: DATE
+        - column:
+            name: NUM
+            type: VARCHAR(10)
+            constraints:
+              nullable: false
+        - column:
+            name: SUM
+            type: NUMBER
+            constraints:
+              nullable: true
+        - column:
+            name: CREATOR_INDIVIDUAL_ID
+            type: UUID
+            constraints:
+              nullable: true
+        - column:
+            name: CREATOR_INDIVIDUAL_ENTREPRENEUR_ID
+            type: UUID
+            constraints:
+              nullable: true
+        - column:
+            name: CREATOR_LEGAL_ENTITY_ID
+            type: UUID
+            constraints:
+              nullable: true
+    - addPrimaryKey:
+        columnNames: ID
+        constraintName: PK_DEAL
+        tableName: DEAL
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: CREATOR_INDIVIDUAL_ID
+        baseTableName: DEAL
+        constraintName: FK_INDIVIDUAL_CREATOR
+        deferrable: true
+        initiallyDeferred: true
+        onDelete: CASCADE
+        onUpdate: RESTRICT
+        referencedColumnNames: ID
+        referencedTableName: INDIVIDUAL
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: CREATOR_INDIVIDUAL_ENTREPRENEUR_ID
+        baseTableName: DEAL
+        constraintName: FK_INDIVIDUAL_ENTREPRENEUR_CREATOR
+        deferrable: true
+        initiallyDeferred: true
+        onDelete: CASCADE
+        onUpdate: RESTRICT
+        referencedColumnNames: ID
+        referencedTableName: INDIVIDUAL_ENTREPRENEUR
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: CREATOR_LEGAL_ENTITY_ID
+        baseTableName: DEAL
+        constraintName: FK_LEGAL_ENTITY_CREATOR
+        deferrable: true
+        initiallyDeferred: true
+        onDelete: CASCADE
+        onUpdate: RESTRICT
+        referencedColumnNames: ID
+        referencedTableName: LEGAL_ENTITY
+        validate: true
+    rollback:
+    - dropTable:
+        tableName: DEAL

@@ -37,11 +37,11 @@ public class Scheduler {
 
             mainProcessor.getIndividualEntrepreneurRevisions(ieId);
 
-            // Создание полиморфных ссылок
+            // Создание (неполиморфных) ссылок
             Deal deal = mainProcessor.createDeal(ieId);
             Deal deal2 = mainProcessor.getDeal(deal.getId());
-            deal2.getParticipants().stream().forEach(party -> log.info("read deal participant = {}", party));
-            log.info("deal creator = {}", deal.getCreator());
+            deal2.getParticipantsIndividual().stream().forEach(party -> log.info("read deal participant = {}", party));
+            log.info("deal creator = {}", deal.getCreatorIndividual());
         }
     }
 }

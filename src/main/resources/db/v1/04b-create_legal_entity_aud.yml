@@ -15,10 +15,13 @@ databaseChangeLog:
             constraints:
               nullable: false
         - column:
-            name: NAME
-            type: VARCHAR(100)
+            name: REVTYPE
+            type: NUMBER
             constraints:
-              nullable: true
+              nullable: false
+        - column:
+            name: ACTUAL_TO
+            type: DATE
         - column:
             name: INN
             type: VARCHAR(10)
@@ -27,6 +30,11 @@ databaseChangeLog:
         - column:
             name: DEAL_ID
             type: UUID
+            constraints:
+              nullable: true
+        - column:
+            name: NAME
+            type: VARCHAR(100)
             constraints:
               nullable: true
     - addPrimaryKey:

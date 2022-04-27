@@ -10,6 +10,19 @@ databaseChangeLog:
             name: ID
             type: UUID
         - column:
+            name: ACTUAL_TO
+            type: DATE
+        - column:
+            name: INN
+            type: VARCHAR(10)
+            constraints:
+              nullable: true
+        - column:
+            name: DEAL_ID
+            type: UUID
+            constraints:
+              nullable: true
+        - column:
             name: NAME
             type: VARCHAR(100)
             constraints:
@@ -18,17 +31,6 @@ databaseChangeLog:
         columnNames: ID
         constraintName: PK_LEGAL_ENTITY
         tableName: LEGAL_ENTITY
-        validate: true
-    - addForeignKeyConstraint:
-        baseColumnNames: ID
-        baseTableName: LEGAL_ENTITY
-        constraintName: FK_LE_PARTY
-        deferrable: true
-        initiallyDeferred: true
-        onDelete: CASCADE
-        onUpdate: RESTRICT
-        referencedColumnNames: ID
-        referencedTableName: PARTY
         validate: true
     rollback:
     - dropTable:

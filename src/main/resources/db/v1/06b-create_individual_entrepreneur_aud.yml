@@ -15,18 +15,26 @@ databaseChangeLog:
             constraints:
               nullable: false
         - column:
-            name: NAME
-            type: CHAR(100)
+            name: REVTYPE
+            type: NUMBER
             constraints:
-              nullable: true
+              nullable: false
+        - column:
+            name: ACTUAL_TO
+            type: DATE
         - column:
             name: INN
-            type: CHAR(10)
+            type: VARCHAR(10)
             constraints:
               nullable: true
         - column:
             name: DEAL_ID
             type: UUID
+            constraints:
+              nullable: true
+        - column:
+            name: NAME
+            type: VARCHAR(100)
             constraints:
               nullable: true
         - column:
