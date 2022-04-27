@@ -1,2 +1,2 @@
 # envers-poc
-PoC использования Hibernate Envers с разными стратегиями реализации полиморфизма
+PoC использования Hibernate Envers со стратегией реализации полиморфизма Joined table
