@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 03-create_party
+    id: 02-create_party
     author: deermakov
     changes:
     - createTable:

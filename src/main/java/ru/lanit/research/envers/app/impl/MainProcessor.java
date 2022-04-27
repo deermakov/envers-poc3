@@ -72,20 +72,21 @@ public class MainProcessor {
     public Deal createDeal(UUID ieId) {
         IndividualEntrepreneur ie = individualEntrepreneurJpaRepository.findById(ieId).orElseThrow();
 
-        // Полиморфная ссылка !
         List<Party> participants = List.of(ie, ie.getIndividual());
 
         Deal deal = Deal.builder()
             .num("№ 1")
             .sum(BigDecimal.TEN)
-            .participants(participants) // нужно ?
+            .creator(ie.getIndividual()) // Полиморфная ссылка Deal > Party
+            //.participants(participants) // это не нужно, т.к. связь хранится не в Deal, а в Party - см. далее
             .build();
 
-        // ссылка на Deal лежит в Party, поэтому надо ее заполнить
+        // Полиморфная ссылка Party > Deal
+        // т.к. ссылка на Deal лежит в Party, надо ее заполнить
         participants.stream().forEach(party -> party.setDeal(deal));
 
-        dealJpaRepository.save(deal);
-        // не нужно, т.к. JPA сам сохраняет измененные сущности: individualEntrepreneurJpaRepository.save(ie);
+        dealJpaRepository.save(deal); // новая сущность, надо сохранить
+        // individualEntrepreneurJpaRepository.save(ie); измененная сущность, JPA сам её сохраняет
 
         return deal;
     }
@@ -94,5 +95,4 @@ public class MainProcessor {
     public Deal getDeal(UUID dealId) {
         return dealJpaRepository.findById(dealId).orElseThrow();
     }
-
 }

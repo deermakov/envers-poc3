@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 03b-create_party_aud
+    id: 02b-create_party_aud
     author: deermakov
     changes:
     - createTable:
@@ -10,15 +10,15 @@ databaseChangeLog:
             name: ID
             type: UUID
         - column:
-              name: REV
-              type: NUMBER
-              constraints:
-                  nullable: false
+            name: REV
+            type: NUMBER
+            constraints:
+              nullable: false
         - column:
-              name: REVTYPE
-              type: NUMBER
-              constraints:
-                  nullable: false
+            name: REVTYPE
+            type: NUMBER
+            constraints:
+              nullable: false
         - column:
             name: ACTUAL_TO
             type: DATE

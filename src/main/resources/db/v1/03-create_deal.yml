@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 02-create_deal
+    id: 03-create_deal
     author: deermakov
     changes:
     - createTable:
@@ -22,10 +22,26 @@ databaseChangeLog:
             type: NUMBER
             constraints:
               nullable: true
+        - column:
+            name: CREATOR_ID
+            type: UUID
+            constraints:
+              nullable: false
     - addPrimaryKey:
         columnNames: ID
         constraintName: PK_DEAL
         tableName: DEAL
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: CREATOR_ID
+        baseTableName: DEAL
+        constraintName: FK_CREATOR
+        deferrable: true
+        initiallyDeferred: true
+        onDelete: CASCADE
+        onUpdate: RESTRICT
+        referencedColumnNames: ID
+        referencedTableName: PARTY
         validate: true
     rollback:
     - dropTable:

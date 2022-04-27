@@ -22,5 +22,9 @@ public class Deal extends DomainObject {
     private BigDecimal sum;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "deal")
-    private List<Party> participants;
+    private List<Party> participants; // Полиморфная ссылка
+
+    @OneToOne
+    @JoinColumn(name = "creator_id")
+    private Party creator; // Полиморфная ссылка
 }

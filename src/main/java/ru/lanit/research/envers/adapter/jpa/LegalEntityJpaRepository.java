@@ -4,7 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.history.RevisionRepository;
 import ru.lanit.research.envers.domain.LegalEntity;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface LegalEntityJpaRepository extends CrudRepository<LegalEntity, UUID>,
