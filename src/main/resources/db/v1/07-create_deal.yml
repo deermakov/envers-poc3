@@ -23,17 +23,7 @@ databaseChangeLog:
             constraints:
               nullable: true
         - column:
-            name: CREATOR_INDIVIDUAL_ID
-            type: UUID
-            constraints:
-              nullable: true
-        - column:
-            name: CREATOR_INDIVIDUAL_ENTREPRENEUR_ID
-            type: UUID
-            constraints:
-              nullable: true
-        - column:
-            name: CREATOR_LEGAL_ENTITY_ID
+            name: CREATOR_ID
             type: UUID
             constraints:
               nullable: true
@@ -41,39 +31,6 @@ databaseChangeLog:
         columnNames: ID
         constraintName: PK_DEAL
         tableName: DEAL
-        validate: true
-    - addForeignKeyConstraint:
-        baseColumnNames: CREATOR_INDIVIDUAL_ID
-        baseTableName: DEAL
-        constraintName: FK_INDIVIDUAL_CREATOR
-        deferrable: true
-        initiallyDeferred: true
-        onDelete: CASCADE
-        onUpdate: RESTRICT
-        referencedColumnNames: ID
-        referencedTableName: INDIVIDUAL
-        validate: true
-    - addForeignKeyConstraint:
-        baseColumnNames: CREATOR_INDIVIDUAL_ENTREPRENEUR_ID
-        baseTableName: DEAL
-        constraintName: FK_INDIVIDUAL_ENTREPRENEUR_CREATOR
-        deferrable: true
-        initiallyDeferred: true
-        onDelete: CASCADE
-        onUpdate: RESTRICT
-        referencedColumnNames: ID
-        referencedTableName: INDIVIDUAL_ENTREPRENEUR
-        validate: true
-    - addForeignKeyConstraint:
-        baseColumnNames: CREATOR_LEGAL_ENTITY_ID
-        baseTableName: DEAL
-        constraintName: FK_LEGAL_ENTITY_CREATOR
-        deferrable: true
-        initiallyDeferred: true
-        onDelete: CASCADE
-        onUpdate: RESTRICT
-        referencedColumnNames: ID
-        referencedTableName: LEGAL_ENTITY
         validate: true
     rollback:
     - dropTable:

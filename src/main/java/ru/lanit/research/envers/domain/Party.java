@@ -9,8 +9,9 @@ import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.persistence.*;
 
-@MappedSuperclass
+@Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @Data
 @ToString(callSuper = true)
 @SuperBuilder

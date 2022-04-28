@@ -77,7 +77,7 @@ public class MainProcessor {
         Deal deal = Deal.builder()
             .num("№ 1")
             .sum(BigDecimal.TEN)
-            .creatorIndividual(ie.getIndividual()) // неполиморфная ссылка Deal > Individual
+            .creator(ie.getIndividual()) // Полиморфная ссылка Deal > Party
             //.participants(participants) // это не нужно, т.к. связь хранится не в Deal, а в Party - см. далее
             .build();
 

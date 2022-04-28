@@ -22,23 +22,9 @@ public class Deal extends DomainObject {
     private BigDecimal sum;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "deal")
-    private List<Individual> participantsIndividual; // Неполиморфная ссылка
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "deal")
-    private List<IndividualEntrepreneur> participantsIndividualEntrepreneur; // Неполиморфная ссылка
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "deal")
-    private List<LegalEntity> participantsLegalEntity; // Неполиморфная ссылка
+    private List<Party> participants; // Полиморфная ссылка
 
     @OneToOne
-    @JoinColumn(name = "creator_individual_id")
-    private Individual creatorIndividual; // Неполиморфная ссылка
-
-    @OneToOne
-    @JoinColumn(name = "creator_individual_entrepreneur_id")
-    private IndividualEntrepreneur creatorIndividualEntrepreneur; // Неполиморфная ссылка
-
-    @OneToOne
-    @JoinColumn(name = "creator_legal_entity_id")
-    private LegalEntity creatorLegalEntity; // Неполиморфная ссылка
+    @JoinColumn(name = "creator_id")
+    private Party creator; // Полиморфная ссылка
 }
